@@ -8,7 +8,9 @@ export default function Header() {
         <form>
           <a href="/">Add Movies</a>
           <input type="text" placeholder="Seach.." name="search" />
-          <button type="submit">Submit</button>
+          <button type="submit">
+            <i className="fa fa-search"></i>
+          </button>
         </form>
       </div>
     </div>
