@@ -3,12 +3,42 @@ import Movie from '../components/Movie';
 export default class Movies extends Component {
   state = {
     movies: [
-      { name: 'Harry Potter 1', genre: 'Fantasy', year: 2001 },
-      { name: 'Harry Potter 2', genre: 'Fantasy', year: 2001 },
-      { name: 'Harry Potter 3', genre: 'Fantasy', year: 2001 },
-      { name: 'Harry Potter 4', genre: 'Fantasy', year: 2001 },
-      { name: 'Harry Potter 5', genre: 'Fantasy', year: 2001 },
-      { name: 'Harry Potter 5', genre: 'Fantasy', year: 2001 },
+      {
+        name: 'Harry Potter 1',
+        genre: 'Fantasy',
+        year: 2001,
+        image: 'https://via.placeholder.com/200x200',
+      },
+      {
+        name: 'Harry Potter 2',
+        genre: 'Fantasy',
+        year: 2001,
+        image: 'https://via.placeholder.com/200x200',
+      },
+      {
+        name: 'Harry Potter 3',
+        genre: 'Fantasy',
+        year: 2001,
+        image: 'https://via.placeholder.com/200x200',
+      },
+      {
+        name: 'Harry Potter 4',
+        genre: 'Fantasy',
+        year: 2001,
+        image: 'https://via.placeholder.com/200x200',
+      },
+      {
+        name: 'Harry Potter 5',
+        genre: 'Fantasy',
+        year: 2001,
+        image: 'https://via.placeholder.com/200x200',
+      },
+      {
+        name: 'Harry Potter 5',
+        genre: 'Fantasy',
+        year: 2001,
+        image: 'https://via.placeholder.com/200x200',
+      },
     ],
   };
   render() {
@@ -20,6 +50,7 @@ export default class Movies extends Component {
             name={movie.name}
             genre={movie.genre}
             year={movie.year}
+            image={movie.image}
           />
         ))}
       </div>
