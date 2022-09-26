@@ -43,6 +43,13 @@ const resolvers = {
   movies: () => {
     return movies;
   },
+  addMovie: (args) => {
+    return {
+      name: args.name,
+      genre: args.genre,
+      year: args.year,
+    };
+  },
 };
 
 module.exports = { resolvers };
