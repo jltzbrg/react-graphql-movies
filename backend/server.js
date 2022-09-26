@@ -1,14 +1,17 @@
 require('dotenv').config();
 const express = require('express');
+const { graphqlHTTP } = require('express-graphql');
 const app = express();
 const port = process.env.PORT || 4000;
 const mongoose = require('mongoose');
+const { buildSchema } = require('graphql');
 
 // Create Mongo Connection
 mongoose.connect(
   `${process.env.MONGO_URI}`,
   {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
   },
   (error) => {
     if (error) {
@@ -21,6 +24,34 @@ mongoose.connect(
   }
 );
 
+// Schema
+const schema = buildSchema(`
+  type Query {
+    name: String
+  }
+`);
+
+// RootQuery
+const rootValue = {
+  name: () => {
+    return 'Harry Potter 1';
+  },
+};
+
+// Setting Up GraphQL
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+    rootValue,
+  })
+);
+
 app.get('/', (req, res) => res.send('Hello World!'));
 
-app.listen(port, () => console.log(`App listening on port ${port}!`));
+app.listen(port, () =>
+  console.log(
+    `App listening on port ${port}! & GraphQL -> http://localhost:${port}/graphql`
+  )
+);
