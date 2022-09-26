@@ -6,6 +6,7 @@ const port = process.env.PORT || 4000;
 const mongoose = require('mongoose');
 const { movieSchema } = require('./schema/index');
 const { resolvers } = require('./resolver/index');
+const cors = require('cors');
 // Create Mongo Connection
 mongoose.connect(
   `${process.env.MONGO_URI}`,
@@ -24,13 +25,7 @@ mongoose.connect(
   }
 );
 
-// RootQuery
-const rootValue = {
-  name: () => {
-    return 'Harry Potter 1';
-  },
-};
-
+app.use(cors());
 // Setting Up GraphQL
 app.use(
   '/graphql',

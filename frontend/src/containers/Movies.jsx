@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import Movie from '../components/Movie';
-export default class Movies extends Component {
+import { useQuery, gql } from '@apollo/client';
+import { graphql } from '@apollo/client/react/hoc';
+
+const allMovies = gql`
+  {
+    movies {
+      name
+      genre
+      year
+    }
+  }
+`;
+
+class Movies extends Component {
   state = {
     movies: [
       {
@@ -42,6 +55,7 @@ export default class Movies extends Component {
     ],
   };
   render() {
+    console.log(this.props);
     return (
       <div className="movies">
         {this.state.movies.map((movie) => (
@@ -57,3 +71,5 @@ export default class Movies extends Component {
     );
   }
 }
+
+export default graphql(allMovies)(Movies);
