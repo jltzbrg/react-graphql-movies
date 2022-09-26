@@ -4,8 +4,8 @@ const { graphqlHTTP } = require('express-graphql');
 const app = express();
 const port = process.env.PORT || 4000;
 const mongoose = require('mongoose');
-const { buildSchema } = require('graphql');
-
+const { movieSchema } = require('./schema/index');
+const { resolvers } = require('./resolver/index');
 // Create Mongo Connection
 mongoose.connect(
   `${process.env.MONGO_URI}`,
@@ -24,13 +24,6 @@ mongoose.connect(
   }
 );
 
-// Schema
-const schema = buildSchema(`
-  type Query {
-    name: String
-  }
-`);
-
 // RootQuery
 const rootValue = {
   name: () => {
@@ -42,9 +35,9 @@ const rootValue = {
 app.use(
   '/graphql',
   graphqlHTTP({
-    schema,
+    schema: movieSchema,
     graphiql: true,
-    rootValue,
+    rootValue: resolvers,
   })
 );
 
