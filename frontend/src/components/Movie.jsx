@@ -5,7 +5,7 @@ export default function Movie({ name, genre, year, image }) {
     <div className="card">
       <div className="container">
         <img
-          src={image}
+          src="https://m.media-amazon.com/images/I/71tN6EeQq8L._SL1417_.jpg"
           alt="Harry Potter Movie"
           width="100%"
           height="230px"

@@ -3,7 +3,7 @@ import Movie from '../components/Movie';
 import { useQuery, gql } from '@apollo/client';
 import { graphql } from '@apollo/client/react/hoc';
 
-const allMovies = gql`
+const ALL_MOVIES = gql`
   {
     movies {
       name
@@ -14,51 +14,18 @@ const allMovies = gql`
 `;
 
 class Movies extends Component {
-  state = {
-    movies: [
-      {
-        name: 'Harry Potter 1',
-        genre: 'Fantasy',
-        year: 2001,
-        image: 'https://via.placeholder.com/200x200',
-      },
-      {
-        name: 'Harry Potter 2',
-        genre: 'Fantasy',
-        year: 2001,
-        image: 'https://via.placeholder.com/200x200',
-      },
-      {
-        name: 'Harry Potter 3',
-        genre: 'Fantasy',
-        year: 2001,
-        image: 'https://via.placeholder.com/200x200',
-      },
-      {
-        name: 'Harry Potter 4',
-        genre: 'Fantasy',
-        year: 2001,
-        image: 'https://via.placeholder.com/200x200',
-      },
-      {
-        name: 'Harry Potter 5',
-        genre: 'Fantasy',
-        year: 2001,
-        image: 'https://via.placeholder.com/200x200',
-      },
-      {
-        name: 'Harry Potter 5',
-        genre: 'Fantasy',
-        year: 2001,
-        image: 'https://via.placeholder.com/200x200',
-      },
-    ],
-  };
   render() {
     console.log(this.props);
+    let data = this.props.data;
+    if (data.loading) {
+      return <h2> Loading your movies...</h2>;
+    }
+    if (data.movies.length === 0) {
+      return <h2>Please add movies of your choice</h2>;
+    }
     return (
       <div className="movies">
-        {this.state.movies.map((movie) => (
+        {data.movies.map((movie) => (
           <Movie
             key={movie.name}
             name={movie.name}
@@ -72,4 +39,4 @@ class Movies extends Component {
   }
 }
 
-export default graphql(allMovies)(Movies);
+export default graphql(ALL_MOVIES)(Movies);
