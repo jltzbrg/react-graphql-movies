@@ -1,54 +1,23 @@
-//const Movie = require('../models/movie');
-
-const movies = [
-  {
-    name: 'Harry Potter 1',
-    genre: 'Fantasy',
-    year: 2001,
-    image: 'https://via.placeholder.com/200x200',
-  },
-  {
-    name: 'Harry Potter 2',
-    genre: 'Fantasy',
-    year: 2001,
-    image: 'https://via.placeholder.com/200x200',
-  },
-  {
-    name: 'Harry Potter 3',
-    genre: 'Fantasy',
-    year: 2001,
-    image: 'https://via.placeholder.com/200x200',
-  },
-  {
-    name: 'Harry Potter 4',
-    genre: 'Fantasy',
-    year: 2001,
-    image: 'https://via.placeholder.com/200x200',
-  },
-  {
-    name: 'Harry Potter 5',
-    genre: 'Fantasy',
-    year: 2001,
-    image: 'https://via.placeholder.com/200x200',
-  },
-  {
-    name: 'Harry Potter 5',
-    genre: 'Fantasy',
-    year: 2001,
-    image: 'https://via.placeholder.com/200x200',
-  },
-];
+const Movie = require('../models/movie');
 
 const resolvers = {
   movies: () => {
-    return movies;
+    // This will find all movies in mongoDB
+    return Movie.find({});
+  },
+  movieByName: (args) => {
+    return Movie.findOne({ name: args.name });
   },
   addMovie: (args) => {
-    return {
+    // Create an object for db
+    let movie = new Movie({
       name: args.name,
       genre: args.genre,
       year: args.year,
-    };
+    });
+    // Save to db
+    movie.save();
+    return movie;
   },
 };
 
